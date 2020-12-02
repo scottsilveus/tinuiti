@@ -15,10 +15,15 @@ function Table() {
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error :(</p>
-    console.log(data)
+
+    let products = data.allProducts.map((product) => (
+        <li key={product.productId} className="product-id">
+            {product.productName}
+        </li>
+    ))
     return (
         <React.Fragment>
-            <div>Hello</div>
+            <div>{products}</div>
         </React.Fragment>
     )
 }
