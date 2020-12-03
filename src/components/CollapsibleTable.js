@@ -36,16 +36,25 @@ function CollapsibleTable() {
     console.log('data', data)
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer
+            style={{ marginLeft: '25%', width: '50%' }}
+            component={Paper}
+        >
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">In Buy Box</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                        <TableCell align="right">Keyword</TableCell>
-                        <TableCell align="right">Category</TableCell>
+                        <TableCell style={{ paddingLeft: '32px' }}>
+                            Name
+                        </TableCell>
+                        <TableCell className="buy-box" align="center">
+                            In Buy Box
+                        </TableCell>
+                        <TableCell className="price" align="center">
+                            Price
+                        </TableCell>
+                        <TableCell align="center">Keyword</TableCell>
+                        <TableCell align="center">Category</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
