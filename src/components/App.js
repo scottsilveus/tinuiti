@@ -1,3 +1,4 @@
+import React from 'react'
 import ApolloWrapper from './ApolloWrapper'
 import './App.css'
 
