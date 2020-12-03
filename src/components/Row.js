@@ -73,8 +73,33 @@ function Row(props) {
                                 gutterBottom
                                 component="div"
                             >
-                                History
+                                Daily Rankings
                             </Typography>
+                            <Table size="small" aria-label="purchases">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Date</TableCell>
+                                        <TableCell>Ranking</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {product.dailyRankings.map(
+                                        (dailyRankings) => (
+                                            <TableRow key={dailyRankings.date}>
+                                                <TableCell
+                                                    component="th"
+                                                    scope="row"
+                                                >
+                                                    {dailyRankings.date}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {dailyRankings.rank}
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    )}
+                                </TableBody>
+                            </Table>
                         </Box>
                     </Collapse>
                 </TableCell>
