@@ -1,0 +1,26 @@
+.arrow-icon {
+    min-width: 30px;
+    width: 3%;
+}
+
+.buy-box {
+    min-width: 75px;
+    width: 6%;
+}
+
+.keyword,
+.price,
+.prod-name {
+    width: 10%;
+    min-width: 125px;
+}
+
+.prod-img {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.wrapper {
+    margin-left: 25%;
+    width: 50%;
+}
