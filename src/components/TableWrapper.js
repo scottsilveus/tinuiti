@@ -10,8 +10,8 @@ import Row from './Row'
 import { gql, useQuery } from '@apollo/client'
 
 const PRODUCTS = gql`
-    query GetAllProductNames {
-        allProducts {
+    query GetAllProductNames($page: Int, $perPage: Int) {
+        allProducts(page: $page, perPage: $perPage) {
             productId
             productName
             inBuybox
@@ -27,7 +27,13 @@ const PRODUCTS = gql`
 `
 
 function TableWrapper() {
-    const { loading, error, data } = useQuery(PRODUCTS)
+    const { loading, error, data, fetchMore } = useQuery(PRODUCTS, {
+        variables: {
+            page: 0,
+            perPage: 5,
+        },
+    })
+
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error :(</p>
 
