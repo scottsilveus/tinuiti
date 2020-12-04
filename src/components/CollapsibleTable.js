@@ -7,63 +7,39 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Collapse from '@material-ui/core/Collapse'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
+
 import Row from './Row'
-import { gql, useQuery } from '@apollo/client'
 
-const PRODUCTS = gql`
-    query GetAllProductNames {
-        allProducts {
-            productId
-            productName
-            inBuybox
-            price
-            image
-            keyword
-            dailyRankings
-            category
-            productDescription
-            reviews
-        }
-    }
-`
-
-function CollapsibleTable() {
-    const { loading, error, data } = useQuery(PRODUCTS)
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error :(</p>
-
-    let products = data.allProducts
-    console.log('data', data)
-
+function CollapsibleTable({ dailyRankings, open }) {
     return (
-        <TableContainer
-            style={{ marginLeft: '25%', width: '50%' }}
-            component={Paper}
-        >
-            <Table aria-label="collapsible table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell />
-                        <TableCell style={{ paddingLeft: '32px' }}>
-                            Name
-                        </TableCell>
-                        <TableCell className="buy-box" align="center">
-                            In Buy Box
-                        </TableCell>
-                        <TableCell className="price" align="center">
-                            Price
-                        </TableCell>
-                        <TableCell align="center">Keyword</TableCell>
-                        <TableCell align="center">Category</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {products.map((product) => (
-                        <Row key={product.productName} product={product} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+                <Typography variant="h6" gutterBottom component="div">
+                    Daily Rankings
+                </Typography>
+                <Table size="small" aria-label="purchases">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Ranking</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {dailyRankings.map((dailyRankings) => (
+                            <TableRow key={dailyRankings.date}>
+                                <TableCell component="th" scope="row">
+                                    {dailyRankings.date}
+                                </TableCell>
+                                <TableCell>{dailyRankings.rank}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Box>
+        </Collapse>
     )
 }
 

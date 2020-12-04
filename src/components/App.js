@@ -2,12 +2,12 @@ import React from 'react'
 import ApolloWrapper from './ApolloWrapper'
 import './App.css'
 
-import Table from './Table'
+import TableWrapper from './TableWrapper'
 
 function App() {
     return (
         <ApolloWrapper>
-            <Table />
+            <TableWrapper />
         </ApolloWrapper>
     )
 }

@@ -3,7 +3,6 @@ import '../styles/rowStyles.css'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
-import Collapse from '@material-ui/core/Collapse'
 import IconButton from '@material-ui/core/IconButton'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -14,6 +13,8 @@ import Typography from '@material-ui/core/Typography'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
+import CollapsibleTable from './CollapsibleTable'
+
 const useRowStyles = makeStyles({
     root: {
         '& > *': {
@@ -22,10 +23,9 @@ const useRowStyles = makeStyles({
     },
 })
 
-function Row(props) {
-    const { product } = props
-    const [open, setOpen] = React.useState(false)
+function Row({ product }) {
     const classes = useRowStyles()
+    const [open, setOpen] = React.useState(false)
 
     return (
         <React.Fragment>
@@ -66,42 +66,10 @@ function Row(props) {
                     style={{ paddingBottom: 0, paddingTop: 0 }}
                     colSpan={6}
                 >
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box margin={1}>
-                            <Typography
-                                variant="h6"
-                                gutterBottom
-                                component="div"
-                            >
-                                Daily Rankings
-                            </Typography>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Date</TableCell>
-                                        <TableCell>Ranking</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {product.dailyRankings.map(
-                                        (dailyRankings) => (
-                                            <TableRow key={dailyRankings.date}>
-                                                <TableCell
-                                                    component="th"
-                                                    scope="row"
-                                                >
-                                                    {dailyRankings.date}
-                                                </TableCell>
-                                                <TableCell>
-                                                    {dailyRankings.rank}
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    )}
-                                </TableBody>
-                            </Table>
-                        </Box>
-                    </Collapse>
+                    <CollapsibleTable
+                        dailyRankings={product.dailyRankings}
+                        open={open}
+                    />
                 </TableCell>
             </TableRow>
         </React.Fragment>
