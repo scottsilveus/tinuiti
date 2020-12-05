@@ -6,12 +6,14 @@ import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Pagination from './Pagination'
 import Row from './Row'
 import { gql, useQuery } from '@apollo/client'
+import { useState } from 'react'
 
-const PRODUCTS = gql`
-    query GetAllProductNames($page: Int, $perPage: Int) {
-        allProducts(page: $page, perPage: $perPage) {
+const GET_PRODUCTS = gql`
+    query GetAllProductNames {
+        allProducts {
             productId
             productName
             inBuybox
@@ -27,22 +29,27 @@ const PRODUCTS = gql`
 `
 
 function TableWrapper() {
-    const { loading, error, data, fetchMore } = useQuery(PRODUCTS, {
-        variables: {
-            page: 0,
-            perPage: 5,
-        },
-    })
+    const perPage = 5
+    let [offset, setOffset] = useState(0)
+    let [currentPage, setCurrentPage] = useState(1)
+
+    const { loading, error, data } = useQuery(GET_PRODUCTS)
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error :(</p>
 
-    let products = data.allProducts
-    console.log('data', data)
+    const numPages = Math.ceil(data.allProducts.length / perPage)
+
+    let products = data.allProducts.slice(offset, offset + perPage)
+    let pagiHandler = (page) => {
+        setOffset(page * 5 - 5)
+        setCurrentPage(page)
+    }
+
     return (
         <React.Fragment>
             <TableContainer
-                style={{ marginLeft: '25%', width: '50%' }}
+                style={{ marginTop: '5%', marginLeft: '25%', width: '50%' }}
                 component={Paper}
             >
                 <Table aria-label="collapsible table">
@@ -68,6 +75,11 @@ function TableWrapper() {
                         ))}
                     </TableBody>
                 </Table>
+                <Pagination
+                    numPages={numPages}
+                    page={currentPage}
+                    pagiHandler={pagiHandler}
+                />
             </TableContainer>
         </React.Fragment>
     )
