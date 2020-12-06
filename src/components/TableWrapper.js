@@ -1,13 +1,9 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+
+// import TableHead from '@material-ui/core/TableHead'
 import Pagination from './Pagination'
 import Row from './Row'
+import TableHead from './TableHead'
 import { gql, useQuery } from '@apollo/client'
 import { useState } from 'react'
 
@@ -46,41 +42,25 @@ function TableWrapper() {
         setCurrentPage(page)
     }
 
+    let headers = ['', 'Name', 'In Buy Box', 'Price', 'Keyword', 'Category']
+
     return (
         <React.Fragment>
-            <TableContainer
-                style={{ marginTop: '5%', marginLeft: '25%', width: '50%' }}
-                component={Paper}
-            >
-                <Table aria-label="collapsible table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell />
-                            <TableCell style={{ paddingLeft: '32px' }}>
-                                Name
-                            </TableCell>
-                            <TableCell className="buy-box" align="center">
-                                In Buy Box
-                            </TableCell>
-                            <TableCell className="price" align="center">
-                                Price
-                            </TableCell>
-                            <TableCell align="center">Keyword</TableCell>
-                            <TableCell align="center">Category</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+            <div className="tableWrapper">
+                <table aria-label="collapsible table">
+                    <TableHead headers={headers} />
+                    <tbody>
                         {products.map((product) => (
                             <Row key={product.productName} product={product} />
                         ))}
-                    </TableBody>
-                </Table>
+                    </tbody>
+                </table>
                 <Pagination
                     numPages={numPages}
                     page={currentPage}
                     pagiHandler={pagiHandler}
                 />
-            </TableContainer>
+            </div>
         </React.Fragment>
     )
 }

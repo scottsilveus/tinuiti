@@ -15,6 +15,7 @@ function Pagination({ page, numPages, pagiHandler }) {
             </button>
         )
     })
+
     return (
         <div className="pagination">
             <button
