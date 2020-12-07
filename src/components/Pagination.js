@@ -17,22 +17,26 @@ function Pagination({ page, numPages, pagiHandler }) {
     })
 
     return (
-        <div className="pagination">
-            <button
-                className="link-button"
-                onClick={() => (page === 1 ? '' : pagiHandler(page - 1))}
-                disabled={page === 1}
-            >
-                ❮
-            </button>
-            {pagi}
-            <button
-                className="link-button"
-                onClick={() => (page === numPages ? '' : pagiHandler(page + 1))}
-                disabled={page === numPages}
-            >
-                ❯
-            </button>
+        <div className="pagiWrapper">
+            <div className="pagination">
+                <button
+                    className="link-button"
+                    onClick={() => (page === 1 ? '' : pagiHandler(page - 1))}
+                    disabled={page === 1}
+                >
+                    ❮
+                </button>
+                {pagi}
+                <button
+                    className="link-button"
+                    onClick={() =>
+                        page === numPages ? '' : pagiHandler(page + 1)
+                    }
+                    disabled={page === numPages}
+                >
+                    ❯
+                </button>
+            </div>
         </div>
     )
 }
