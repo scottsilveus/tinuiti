@@ -6,7 +6,6 @@ import CollapsibleTable from './CollapsibleTable'
 
 function Row({ product }) {
     const [open, setOpen] = React.useState(false)
-
     return (
         <React.Fragment>
             <tr style={{ borderBottom: 'unset' }}>
@@ -35,6 +34,12 @@ function Row({ product }) {
                 <td className="keyword cell align-center">{product.keyword}</td>
                 <td className="category cell align-center">
                     {product.category}
+                </td>
+                <td className="rating cell align-center">
+                    {product.reviews[0].rating}
+                </td>
+                <td className="reviews cell align-center">
+                    {product.reviews[0].count}
                 </td>
             </tr>
             <tr>

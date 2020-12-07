@@ -37,12 +37,22 @@ function TableWrapper() {
     const numPages = Math.ceil(data.allProducts.length / perPage)
 
     let products = data.allProducts.slice(offset, offset + perPage)
+
     let pagiHandler = (page) => {
         setOffset(page * 5 - 5)
         setCurrentPage(page)
     }
 
-    let headers = ['', 'Name', 'In Buy Box', 'Price', 'Keyword', 'Category']
+    let headers = [
+        '',
+        'Name',
+        'In Buy Box',
+        'Price',
+        'Keyword',
+        'Category',
+        'Rating',
+        'Reviews',
+    ]
 
     return (
         <React.Fragment>

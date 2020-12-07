@@ -57,5 +57,11 @@ describe('Row', () => {
         test('product inBuybox is displayed', () => {
             expect(screen.getByText(/false/)).toBeInTheDocument()
         })
+        test('product rating is displayed', () => {
+            expect(screen.getByText('3')).toBeInTheDocument()
+        })
+        test('product review count is displayed', () => {
+            expect(screen.getByText(/903/)).toBeInTheDocument()
+        })
     })
 })
