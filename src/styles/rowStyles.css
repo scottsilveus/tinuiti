@@ -1,6 +1,16 @@
 .arrow-icon {
     min-width: 30px;
     width: 3%;
+    text-align: center;
+    display: table-cell;
+    padding: 16px;
+    font-size: 0.875rem;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 400;
+    line-height: 1.43;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    letter-spacing: 0.01071em;
+    vertical-align: inherit;
 }
 
 .buy-box {
@@ -27,4 +37,21 @@
 
 .MuiPaper-rounded {
     border-top: 1px solid rgba(224, 224, 224, 1);
+}
+
+.arrow {
+    border: solid #757575;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }

@@ -1,8 +1,6 @@
 import React from 'react'
 import '../styles/rowStyles.css'
 import PropTypes from 'prop-types'
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
 import CollapsibleTable from './CollapsibleTable'
 
@@ -12,17 +10,13 @@ function Row({ product }) {
     return (
         <React.Fragment>
             <tr style={{ borderBottom: 'unset' }}>
-                <td className="arrow-icon cell">
+                <td className="arrow-icon">
                     <button
                         aria-label="expand row"
                         size="small"
                         onClick={() => setOpen(!open)}
                     >
-                        {open ? (
-                            <KeyboardArrowUpIcon />
-                        ) : (
-                            <KeyboardArrowDownIcon />
-                        )}
+                        <i className={open ? 'arrow up' : 'arrow down'}></i>
                     </button>
                 </td>
                 <td className="prod-name cell" component="th" scope="row">
