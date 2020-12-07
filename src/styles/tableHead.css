@@ -79,6 +79,7 @@ td button {
 }
 
 .tableWrapper {
+    position: relative;
     margin-top: 5%;
     margin-left: 25%;
     width: 50%;
@@ -89,4 +90,5 @@ td button {
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     background-color: #fff;
     border-top: 1px solid rgba(224, 224, 224, 1);
+    min-width: 735px;
 }
