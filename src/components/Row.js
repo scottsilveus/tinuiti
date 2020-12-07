@@ -20,7 +20,11 @@ function Row({ product }) {
                     </button>
                 </td>
                 <td className="prod-name cell" component="th" scope="row">
-                    <img className="prod-img" alt="" src={product.image} />
+                    <img
+                        className="prod-img"
+                        alt="product-img"
+                        src={product.image}
+                    />
 
                     <span>{product.productName}</span>
                 </td>

@@ -8,7 +8,7 @@ function CollapsibleTable({ dailyRankings, open }) {
                 <div className="collapsible-wrapper-inner">
                     <div className="box">
                         <div className="collapsible-title">Daily Rankings</div>
-                        <table size="small" aria-label="purchases">
+                        <table size="small" aria-label="">
                             <thead>
                                 <tr>
                                     <th className="collapsible-header cell">
