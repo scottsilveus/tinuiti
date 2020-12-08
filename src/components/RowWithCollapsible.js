@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import CollapsibleTable from './CollapsibleTable'
 
-function Row({ product, cols }) {
+function RowWithCollapsible({ product, cols }) {
     const [open, setOpen] = React.useState(false)
     return (
         <React.Fragment>
@@ -22,7 +22,7 @@ function Row({ product, cols }) {
                         ></i>
                     </button>
                 </td>
-                <td className="prod-name cell" component="th" scope="row">
+                <td className="prod-name cell" component="th">
                     <img
                         className="prod-img"
                         alt="product-img"
@@ -58,4 +58,9 @@ function Row({ product, cols }) {
     )
 }
 
-export default Row
+export default RowWithCollapsible
+
+RowWithCollapsible.propTypes = {
+    product: PropTypes.object.isRequired,
+    cols: PropTypes.number,
+}
