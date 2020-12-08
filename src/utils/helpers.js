@@ -13,6 +13,7 @@ export function sortProducts(items, filter, sortBy) {
         case 'in-buy-box':
             filter = 'inBuybox'
             break
+        default:
     }
 
     if (sortBy === 'asc') {
