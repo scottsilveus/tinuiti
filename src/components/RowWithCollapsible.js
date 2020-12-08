@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/rowStyles.css'
+import '../styles/RowWithCollapsible.css'
 import PropTypes from 'prop-types'
 
 import CollapsibleTable from './CollapsibleTable'

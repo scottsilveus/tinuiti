@@ -34,6 +34,6 @@
     width: 50%;
 }
 
-.MuiPaper-rounded {
-    border-top: 1px solid rgba(224, 224, 224, 1);
+.align-center {
+    text-align: center;
 }
