@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import CollapsibleTable from './CollapsibleTable'
 
-function Row({ product }) {
+function Row({ product, cols }) {
     const [open, setOpen] = React.useState(false)
     return (
         <React.Fragment>
@@ -15,7 +15,11 @@ function Row({ product }) {
                         size="small"
                         onClick={() => setOpen(!open)}
                     >
-                        <i className={open ? 'arrow up' : 'arrow down'}></i>
+                        <i
+                            className={
+                                open ? 'fas fa-angle-up' : 'fas fa-angle-down'
+                            }
+                        ></i>
                     </button>
                 </td>
                 <td className="prod-name cell" component="th" scope="row">
@@ -43,7 +47,7 @@ function Row({ product }) {
                 </td>
             </tr>
             <tr>
-                <td style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <td style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={cols}>
                     <CollapsibleTable
                         dailyRankings={product.dailyRankings}
                         open={open}

@@ -6,13 +6,6 @@ thead {
     display: table-header-group;
 }
 
-table {
-    width: 100%;
-    display: table;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
 th,
 tr {
     color: inherit;
@@ -69,27 +62,47 @@ td button {
     text-align: center;
 }
 
-.name {
-    text-align: left;
-    padding-left: 32px;
-}
-
 .align-center {
     text-align: center;
 }
 
-.tableWrapper {
-    position: relative;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-    color: rgba(0, 0, 0, 0.87);
-    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    background-color: #fff;
-    border-top: 1px solid rgba(224, 224, 224, 1);
-    min-width: 890px;
+.head-arrow-icon {
+    position: absolute;
+    top: 17px;
+}
+
+.name-arrow {
+    left: 37px;
+}
+
+.in-buy-box-arrow {
+    left: -3px;
+}
+
+.price-arrow {
+    left: 8px;
+}
+
+.keyword-arrow {
+    left: 29px;
+}
+
+.category-arrow {
+    left: 6px;
+}
+.rating-arrow {
+    left: 3px;
+}
+
+.reviews-arrow {
+    left: 4px;
+}
+
+.head-arrow-icon button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+.fas {
+    font-size: 16px;
 }
