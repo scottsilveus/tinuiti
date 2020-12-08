@@ -9,7 +9,11 @@ describe('TableHead', () => {
     beforeEach(() => {
         render(
             <table>
-                <TableHead headers={headers} />
+                <TableHead
+                    headers={headers}
+                    setProducts={jest.fn()}
+                    allProducts={[]}
+                />
             </table>
         )
     })
