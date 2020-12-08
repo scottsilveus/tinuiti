@@ -1,0 +1,46 @@
+.filter-wrap {
+    margin-top: 3%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-border {
+    height: 40px;
+    background: #fff;
+    display: inline-flex;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 24px;
+    padding: 5px 5px 5px 15px;
+    width: 50%;
+}
+/* There is a weird FF bug of the select menu text dropping down after a selection is made */
+.select {
+    height: 40px;
+    width: 15%;
+    font-size: 12px;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    /* border: 1px solid #dfe1e5; */
+    margin-left: 25px;
+    position: relative;
+    right: 20%;
+    top: 0;
+    outline: none;
+}
+
+.search-filter {
+    display: inline-flex;
+    border: none;
+    width: 90%;
+    outline: none;
+}
+
+.select-arrow {
+    cursor: pointer;
+    top: 13px;
+    position: relative;
+}

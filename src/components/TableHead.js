@@ -2,8 +2,14 @@ import React from 'react'
 import '../styles/tableHead.css'
 import { sortProducts } from '../utils/helpers'
 import PropTypes from 'prop-types'
-
-function TableHead({ headers, setProducts, allProducts }) {
+//  Don't think it's ideal passing in all of these props, but I needed it to work quickly
+function TableHead({
+    headers,
+    setProducts,
+    allProducts,
+    filteredProducts,
+    setFilteredProducts,
+}) {
     function handleColumnSort(e, header) {
         let asc = e.target.className.includes('down')
         // reset all header arrows to point downwards
@@ -14,9 +20,15 @@ function TableHead({ headers, setProducts, allProducts }) {
         if (asc) {
             e.target.className = 'fas fa-angle-up'
             setProducts(sortProducts(allProducts.slice(), header, 'asc'))
+            setFilteredProducts(
+                sortProducts(filteredProducts.slice(), header, 'asc')
+            )
         } else {
             e.target.className = 'fas fa-angle-down'
             setProducts(sortProducts(allProducts.slice(), header, 'dsc'))
+            setFilteredProducts(
+                sortProducts(filteredProducts.slice(), header, 'dsc')
+            )
         }
     }
 
@@ -61,4 +73,6 @@ TableHead.propTypes = {
     headers: PropTypes.array.isRequired,
     setProducts: PropTypes.func.isRequired,
     allProducts: PropTypes.array.isRequired,
+    filteredProducts: PropTypes.array,
+    setFilteredProducts: PropTypes.func,
 }

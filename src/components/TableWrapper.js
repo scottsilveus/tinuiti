@@ -1,11 +1,12 @@
 import React from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/table.css'
 
 import Pagination from './Pagination'
 import RowWithCollapsible from './RowWithCollapsible'
 import TableHead from './TableHead'
+import SearchFilter from './SearchFilter'
 
 const GET_PRODUCTS = gql`
     query GetAllProductNames {
@@ -26,29 +27,7 @@ const GET_PRODUCTS = gql`
 
 function TableWrapper() {
     const perPage = 5
-
-    let [offset, setOffset] = useState(0)
-    let [currentPage, setCurrentPage] = useState(1)
-    let [allProducts, setProducts] = useState([])
-
-    const { loading, error, data } = useQuery(GET_PRODUCTS)
-
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error :(</p>
-
-    if (!allProducts.length) {
-        setProducts(data.allProducts)
-    }
-
-    const numPages = Math.ceil(allProducts.length / perPage)
-
-    let products = allProducts.slice(offset, offset + perPage)
-
-    let pagiHandler = (page) => {
-        setOffset(page * 5 - 5)
-        setCurrentPage(page)
-    }
-    let headers = [
+    const headers = [
         '',
         'Name',
         'In Buy Box',
@@ -59,14 +38,65 @@ function TableWrapper() {
         'Reviews',
     ]
 
+    let [offset, setOffset] = useState(0)
+    let [currentPage, setCurrentPage] = useState(1)
+    let [allProducts, setProducts] = useState([])
+    let [filteredProducts, setFilteredProducts] = useState([])
+    let [filterType, setFilterType] = useState('productName')
+    let [searchTerm, setSearchTerm] = useState('')
+
+    useEffect(() => {
+        let results = allProducts.filter((product) => {
+            return product[filterType].toLowerCase().includes(searchTerm)
+        })
+        setFilteredProducts(results)
+    }, [searchTerm])
+
+    const { loading, error, data } = useQuery(GET_PRODUCTS)
+
+    if (loading) return <p>Loading...</p>
+    if (error) return <p>Error :(</p>
+
+    if (!allProducts.length) {
+        setProducts(data.allProducts)
+    }
+
+    //  products to be rendered; either a subset of all or filtered
+    let products, numPages
+    if (!filteredProducts.length) {
+        products = allProducts.slice(offset, offset + perPage)
+        numPages = Math.ceil(allProducts.length / perPage)
+    } else {
+        products = filteredProducts.slice(offset, offset + perPage)
+        numPages = Math.ceil(filteredProducts.length / perPage)
+    }
+
+    let pagiHandler = (page) => {
+        setOffset(page * 5 - 5)
+        setCurrentPage(page)
+    }
+
     return (
         <React.Fragment>
+            <SearchFilter
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                filterType={filterType}
+                setFilterType={setFilterType}
+                options={[
+                    { name: 'Product Name', filter: 'productName' },
+                    { name: 'Keyword', filter: 'keyword' },
+                    { name: 'Category', filter: 'category' },
+                ]}
+            />
             <div className="tableWrapper">
                 <table aria-label="collapsible table">
                     <TableHead
                         headers={headers}
                         setProducts={setProducts}
                         allProducts={allProducts}
+                        filteredProducts={filteredProducts}
+                        setFilteredProducts={setFilteredProducts}
                     />
                     <tbody>
                         {products.map((product) => (
