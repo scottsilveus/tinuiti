@@ -5,7 +5,7 @@ export function isEmpty(obj) {
     return true
 }
 
-export function sortProducts(items, filter, sortBy) {
+function filterCorrection(filter) {
     switch (filter) {
         case 'name':
             filter = 'productName'
@@ -15,17 +15,36 @@ export function sortProducts(items, filter, sortBy) {
             break
         default:
     }
+    return filter
+}
+
+function ascReviewOrRating(items, filter) {
+    // number of reviews comes in as count
+    if (filter === 'reviews') {
+        filter = 'count'
+    }
+    return items.sort((a, b) =>
+        a['reviews'][0][filter] > b['reviews'][0][filter] ? 1 : -1
+    )
+}
+
+function dscReviewOrRating(items, filter) {
+    // number of reviews comes in as count
+    if (filter === 'reviews') {
+        filter = 'count'
+    }
+    return items.sort((a, b) =>
+        a['reviews'][0][filter] < b['reviews'][0][filter] ? 1 : -1
+    )
+}
+
+export function sortProducts(items, filter, sortBy) {
+    filter = filterCorrection(filter)
 
     if (sortBy === 'asc') {
         // reviews and rating come in another oject named reviews
         if (filter === 'reviews' || filter === 'rating') {
-            // number of reviews comes in as count
-            if (filter === 'reviews') {
-                filter = 'count'
-            }
-            return items.sort((a, b) =>
-                a['reviews'][0][filter] > b['reviews'][0][filter] ? 1 : -1
-            )
+            return ascReviewOrRating(items, filter)
         }
 
         return items.sort((a, b) => (a[filter] > b[filter] ? 1 : -1))
@@ -34,13 +53,7 @@ export function sortProducts(items, filter, sortBy) {
     if (sortBy === 'dsc') {
         // reviews and rating come in another oject named reviews
         if (filter === 'reviews' || filter === 'rating') {
-            // number of reviews comes in as count
-            if (filter === 'reviews') {
-                filter = 'count'
-            }
-            return items.sort((a, b) =>
-                a['reviews'][0][filter] < b['reviews'][0][filter] ? 1 : -1
-            )
+            return dscReviewOrRating(items, filter)
         }
         return items.slice().sort((a, b) => (a[filter] < b[filter] ? 1 : -1))
     }
