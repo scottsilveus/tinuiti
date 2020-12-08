@@ -4,67 +4,53 @@ import { sortProducts } from '../utils/helpers'
 import PropTypes from 'prop-types'
 
 function TableHead({ headers, setProducts, allProducts }) {
+    function handleColumnSort(e, header) {
+        let asc = e.target.className.includes('down')
+        // reset all header arrows to point downwards
+        document
+            .querySelectorAll('.head-arrow-icon button')
+            .forEach((e) => (e.className = 'fas fa-angle-down'))
+        // sort products by column selected
+        if (asc) {
+            e.target.className = 'fas fa-angle-up'
+            setProducts(sortProducts(allProducts.slice(), header, 'asc'))
+        } else {
+            e.target.className = 'fas fa-angle-down'
+            setProducts(sortProducts(allProducts.slice(), header, 'dsc'))
+        }
+    }
+
     let header = headers.map((header) => {
         let correctedHeader = header.replace(/ /g, '-').toLowerCase()
         let arrowClass = `${correctedHeader}-arrow head-arrow-icon`
 
         let arrowIcon = (
-            <span key={header} className={arrowClass}>
+            <span key={`{header}1`} className={arrowClass}>
                 <button
+                    className="fas fa-angle-down"
                     aria-label="sort"
                     size="small"
                     onClick={(e) => {
-                        let ele = e.target
-                        let asc = ele.className.includes('down')
-                        document
-                            .querySelectorAll('.head-arrow-icon i')
-                            .forEach((e) => (e.className = 'fas fa-angle-down'))
-                        // BUG sometimes the arrow rotates and extra 45 degrees
-                        // turning the arrow diagnal
-                        // change from css arrows to svg img
-                        if (asc) {
-                            ele.className = 'fas fa-angle-up'
-                            setProducts(
-                                sortProducts(
-                                    allProducts.slice(),
-                                    correctedHeader,
-                                    'asc'
-                                )
-                            )
-                        } else {
-                            ele.className = 'fas fa-angle-down'
-                            setProducts(
-                                sortProducts(
-                                    allProducts.slice(),
-                                    correctedHeader,
-                                    'dsc'
-                                )
-                            )
-                        }
-
-                        console.log(e.target.className)
+                        handleColumnSort(e, correctedHeader)
                     }}
-                >
-                    <i class="fas fa-angle-down"></i>
-                </button>
+                ></button>
             </span>
         )
         return (
-            <React.Fragment>
-                <th
-                    style={{ position: 'relative' }}
-                    scope="col"
-                    className="cell cell-head"
-                >
-                    {header ? arrowIcon : ''}
-                    {header}
-                </th>
-            </React.Fragment>
+            <th
+                key={`${header}2`}
+                style={{ position: 'relative' }}
+                scope="col"
+                className="cell cell-head"
+            >
+                {header ? arrowIcon : ''}
+                {header}
+            </th>
         )
     })
     return (
         <thead>
-            <tr>{header}</tr>
+            <tr key="head">{header}</tr>
         </thead>
     )
 }
