@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/pagination.css'
+import PropTypes from 'prop-types'
 
 function Pagination({ page, numPages, pagiHandler }) {
     let pagi = [...Array(numPages)].map((x, index) => {
@@ -42,3 +43,9 @@ function Pagination({ page, numPages, pagiHandler }) {
 }
 
 export default Pagination
+
+Pagination.propTypes = {
+    page: PropTypes.number.isRequired,
+    numPages: PropTypes.number.isRequired,
+    pagiHandler: PropTypes.func.isRequired,
+}

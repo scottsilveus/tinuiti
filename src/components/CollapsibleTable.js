@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/collapsibleTable.css'
+import PropTypes from 'prop-types'
+
 function CollapsibleTable({ dailyRankings, open }) {
     let containerClass = open ? 'container open' : 'container closed'
     return (
@@ -46,3 +48,8 @@ function CollapsibleTable({ dailyRankings, open }) {
 }
 
 export default CollapsibleTable
+
+CollapsibleTable.propTypes = {
+    dailyRankings: PropTypes.array.isRequired,
+    open: PropTypes.bool.isRequired,
+}

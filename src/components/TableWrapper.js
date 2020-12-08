@@ -4,10 +4,8 @@ import { useState } from 'react'
 import '../styles/table.css'
 
 import Pagination from './Pagination'
-import Row from './Row'
+import RowWithCollapsible from './RowWithCollapsible'
 import TableHead from './TableHead'
-import Filters from './Filters'
-import { isEmpty } from '../utils/helpers'
 
 const GET_PRODUCTS = gql`
     query GetAllProductNames {
@@ -31,7 +29,6 @@ function TableWrapper() {
 
     let [offset, setOffset] = useState(0)
     let [currentPage, setCurrentPage] = useState(1)
-    let [filter, setFilter] = useState({})
     let [allProducts, setProducts] = useState([])
 
     const { loading, error, data } = useQuery(GET_PRODUCTS)
@@ -73,7 +70,7 @@ function TableWrapper() {
                     />
                     <tbody>
                         {products.map((product) => (
-                            <Row
+                            <RowWithCollapsible
                                 key={product.productName}
                                 product={product}
                                 cols={headers.length}

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/tableHead.css'
 import { sortProducts } from '../utils/helpers'
+import PropTypes from 'prop-types'
 
 function TableHead({ headers, setProducts, allProducts }) {
     let header = headers.map((header) => {
@@ -69,3 +70,9 @@ function TableHead({ headers, setProducts, allProducts }) {
 }
 
 export default TableHead
+
+TableHead.propTypes = {
+    headers: PropTypes.array.isRequired,
+    setProducts: PropTypes.func.isRequired,
+    allProducts: PropTypes.array.isRequired,
+}
