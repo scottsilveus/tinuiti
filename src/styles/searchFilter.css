@@ -14,22 +14,23 @@
     border-radius: 24px;
     padding: 5px 5px 5px 15px;
     width: 50%;
+    min-width: 450px;
 }
 /* There is a weird FF bug of the select menu text dropping down after a selection is made */
 .select {
     height: 40px;
-    width: 15%;
+    width: 25%;
     font-size: 12px;
     appearance: none;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    /* border: 1px solid #dfe1e5; */
-    margin-left: 25px;
     position: relative;
-    right: 20%;
     top: 0;
     outline: none;
+    padding-right: 15px;
+    text-align: right;
+    z-index: 5;
 }
 
 .search-filter {
@@ -42,5 +43,6 @@
 .select-arrow {
     cursor: pointer;
     top: 13px;
+    right: 10px;
     position: relative;
 }

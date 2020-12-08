@@ -29,15 +29,15 @@ function SearchFilter({
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-filter"
                 />
+                <select
+                    className="select"
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                >
+                    {option}
+                </select>
                 <i className="fas fa-angle-down select-arrow"></i>
             </div>
-            <select
-                className="select"
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-            >
-                {option}
-            </select>
         </div>
     )
 }
